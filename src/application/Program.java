@@ -18,6 +18,7 @@ public class Program {
 	    	
 	    	conn.setAutoCommit(false);
 	    	
+<<<<<<< HEAD
 	    st =conn.createStatement();	
 	    
 	    int rows1 = st.executeUpdate("UPDATE seller SET BaseSalary = 2090 WHERE DepartmentId = 1");
@@ -41,6 +42,32 @@ public class Program {
 	            throw new DbException("Error tryng to rollback! Caused by: " + e.getMessage()); 
 	        }
 	    }    
+=======
+	    	st = conn.createStatement();
+	    	
+	    	int rows1 = st.executeUpdate("UPDATE seller SET BaseSalary = 2090 WHERE DepartmentId = 1");
+	    	
+	    	//int x = 1;
+	    	//if (x < 2) {
+	    		//throw new SQLException("Fake error");
+	    	//}	
+	    
+	    	int rows2 = st.executeUpdate("UPDATE seller SET BaseSalary = 3090 WHERE DepartmentId = 2");
+	    	
+	    	conn.commit();
+	    	
+	    	System.out.println("rows1");
+	    	System.out.println("rows2");
+	    }    
+	    catch(SQLException e) {
+	    	try {
+				conn.rollback();
+				throw new DbException("Transaction rolled back! Caused by: " + e.getMessage());
+			} catch (SQLException e1) {
+				throw new DbException("Error tryng to rollback! Caused by: " + e.getMessage());
+			}	    	
+	    }	
+>>>>>>> cfd46356338a228f6034f635ecedba0537bccaea
     	finally {
     		DB.closeStatement(st);
     		DB.closeConnection();    		
